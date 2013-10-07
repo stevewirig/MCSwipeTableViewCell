@@ -223,6 +223,14 @@ secondStateIconName:(NSString *)secondIconName
         
         if (fabsf(point.x) > fabsf(point.y) ) {
             
+            //Disable the gesture if both modes are set to MCSwipeTableViewCellModeNone
+            if (point.x > 0 && self.modeForState1 == MCSwipeTableViewCellModeNone && self.modeForState2 == MCSwipeTableViewCellModeNone){
+                return NO;
+            }
+            if (point.x < 0 && self.modeForState3 == MCSwipeTableViewCellModeNone && self.modeForState4 == MCSwipeTableViewCellModeNone){
+                return NO;
+            }
+            
             // We notify the delegate that we just started dragging
             if ([_delegate respondsToSelector:@selector(swipeTableViewCellDidStartSwiping:)]) {
                 [_delegate swipeTableViewCellDidStartSwiping:self];
